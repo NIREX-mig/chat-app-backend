@@ -8,12 +8,17 @@ connectToMongo();
 
 const app = express();
 const server = createServer(app);
-const port = 8000;
+
+const port = process.env.PORT || 8000;
+
 const io = new Server(server)
+
 app.use(cors())
 app.use(express.json())
 
 app.use('/api/auth', require("./routes/auth"));
+app.use('/api/contect', require("./routes/contect"));
+
 
 io.on('connection' , (socket) =>{
     console.log("connected on socket    ")
